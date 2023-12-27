@@ -4,6 +4,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/custom3.css' %}">
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
 <style>
 
 </style>
@@ -37,7 +39,7 @@
 </form>
 </div>
 {% for msg in messages %}
-{{msg}}
+<p style="color:red;font-size:30px;" class="text-center">{{msg}}!!</p>
 {% endfor %}
 </body>
 </html>
