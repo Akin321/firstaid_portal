@@ -1,0 +1,87 @@
+
+
+
+header img{
+width:100px;
+height:100px;
+}
+
+ body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    flex: 1;
+    padding: 20px;
+
+}
+
+.footer {
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+    margin-top:30px;
+
+}
+.footer img{
+width:30px;
+height:30px;
+}
+.hover-element:hover{
+color:blue;
+}
+.banner{
+margin-bottom:10px;
+}
+
+.navbar{
+margin-bottom:40px;
+}
+.cart-image{
+width:100px;
+height:100px;
+}
+.mab{
+    font-size: 30px;
+    color: red;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: auto;
+}
+
+
+form p {
+    margin-bottom: 10px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

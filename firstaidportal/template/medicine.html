@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{medicine.name}}
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <img src="{{medicine.img.url}}" alt="{{medicine.name}}" width="400px" height="400px">
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 mxauto">
+        <div class="med_desc">
+        <h1 style="text-transform: uppercase;">{{medicine.name}}</h1>
+        <h2>Description</h2>
+        <p>{{medicine.desc}}</p>
+        <p><b>exp_date: {{medicine.exp_date}}</b></p>
+        <p><b>stock={{medicine.stock}}</b></p><br>
+            </div>
+
+        {% if user.is_administrator %}
+        <a href="{% url 'edit:update' med_id=medicine.id %}"><button class="btn btn-warning" type="submit">Update</button></a>
+        <a href="{% url 'edit:delete' med_id=medicine.id %}"><button class="btn btn-danger" type="submit">Delete</button></a>
+       {% else %}
+                {% if medicine.stock > 0 %}
+<a href="{% url 'cart:add_to_cart' med_id=medicine.id %}"><button class='btn btn-primary' type="submit">add to cart</button></a><br><br>
+{% else %}
+        <p style="font-size:25px;color:red"><b>out of stock</b></p><br><br>
+{% endif %}
+        {% endif %}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">name</label>
+    <input type="text" class="form-control" name="name" id="exampleInputEmail1">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">stock</label>
+    <input type="number" class="form-control" name="stock" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3">
+    <label for="ex" class="form-label">expiry_date</label>
+    <input type="date" class="form-control"  name="exp_date" id="ex">
+  </div>
+  <div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc"></textarea>
+</div>
+
+  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="category">
+    {% for li in link %}
+
+  <option value="{{ li.id }}">{{li}}</option>
+    {% endfor %}
+</select>
+
+  <div class="mb-3">
+    <label for="exa" class="form-label">image</label>
+    <input type="file" class="form-control"  name="img" id="exa">
+  </div>
+
+  <button style="width:100%" type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

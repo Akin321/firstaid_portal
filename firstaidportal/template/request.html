@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>request</title>
+</head>
+<body>
+<div class="container">
+ <h1 class="text-center">Requests</h1>
+    {% if not req_items %}
+    <div class="d-flex align-items-center justify-content-center" style="font-size:50px;color:red;height:100vh;">
+    <p>No Request For Medicine!!</p>
+        </div>
+    {% else %}
+
+    {% for req_item in req_items %}
+        <div>
+            <p>User: {{ req_item.user }}</p>
+            <p>Cart Items:</p>
+            <ul>
+                {% for cart_item in req_item.cart_items.all %}
+                    <li>{{ cart_item }} (Quantity: {{ cart_item.quantity }})</li>
+
+                {% endfor %}
+            </ul>
+            <a href="{% url 'cart:accept' req_id=req_item.id %}" class="btn btn-success">Accept</a>
+            <a href="{% url 'cart:Decline' req_id=req_item.id %}" class="btn btn-danger">Decline</a>
+        </div>
+        <hr>
+    {% endfor %}
+    {% endif %}
+    </div>
+</body>
+</html>

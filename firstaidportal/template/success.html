@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Title</title>
+</head>
+<body>
+
+  <h1 class="text-center" style="margin-bottom:40px;background-color:green">Request Successfully Submited.Please collect medicines from First Aid Cabin</h1>
+    <div class="d-flex justify-content-center">
+<a href="{% url 'firstaid_app:home' %}" class="btn btn-primary">go to Home</a>
+</div>
+
+</body>
+</html>

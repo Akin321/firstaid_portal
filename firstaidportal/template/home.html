@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}home{% endblock %}
+{% block body %}
+<div>
+<img class="banner" src="{% static 'img/banner.jpg' %}" width="100%">
+</div>
+<div>
+    {% if category %}
+      {% if user.is_administrator %}
+    <div  style="float:right">
+    <a href="{% url 'edit:update_cat' cat_id=category.id %}" class="btn btn-warning">update</a>
+    <a href="{% url 'edit:delete_cat' cat_id=category.id %}" class="btn btn-danger">delete</a>
+        </div>
+    {% endif %}
+<h1 style="text-transform: uppercase;">{{category.name}}</h1>
+
+    <h3>Description</h3>
+<P>{{category.desc}}</p>
+{% endif %}
+</div>
+<div>
+    <h1 class="text-center">Medicines</h1><br>
+    {% if user.is_administrator %}
+    {% if category == None %}
+    <a href="{% url 'edit:add' %}" class="btn btn-primary">Add Medicine</a><br><br>
+    {% endif %}
+    {% endif %}
+
+    {% if category and not medicine %}
+    <p class="text-center" style="color:red;font-size:30px">No Medicine Available!!</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">QUANTITY</th>
+                    <th scope="col">EXP_DATE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for med in medicine %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td><a href="{{med.get_url}}" class="text-uppercase">{{med.name}}</a></td>
+                        <td>{{med.stock}}</td>
+                        <td>{{med.exp_date}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+</div>
+
+{% endblock %}

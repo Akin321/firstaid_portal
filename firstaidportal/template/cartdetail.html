@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+cart
+{% endblock %}
+{% block body %}
+{% if not cartitems %}
+<div class="text-center">
+ <h1>Please select a medicine</h1>
+<a class="btn btn-primary" href="{% url 'firstaid_app:home' %}">Go To HomePage</a>
+</div>
+
+{% else %}
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <table class="table">
+            <thead class="text-center">
+            <th colspan="5">
+                Your Cart
+            </th>
+            </thead>
+            <tbody>
+            {% for cartitem in cartitems %}
+            <tr>
+                <td><a href="{{cartitem.medicine.get_url}}"><img src="{{cartitem.medicine.img.url}}" width="100px; height:100px;"></a></td>
+               <td><p>{{cartitem.medicine.name}}</p>
+                <p>{{cartitem.quantity}}</p>
+               <p>exp_date:{{cartitem.medicine.exp_date}}</p> </td>
+                {% if cartitem.quantity < cartitem.medicine.stock %}
+                <td><a href="{% url 'cart:add_to_cart' med_id=cartitem.medicine.id %}"><i class="fa-solid fa-plus"></i></a></td>
+                <td><a href="{% url 'cart:remove' med_id=cartitem.medicine.id cart_id=cartitem.id %}"><i class="fa-solid fa-minus"></i></a></td>
+                <td><a href="{% url 'cart:delete_all' del_id=cartitem.id%}"><i class="fa-solid fa-trash"></i></a></td>
+                {% else %}
+                <td><a href="{% url 'cart:remove' med_id=cartitem.medicine.id cart_id=cartitem.id %}"><i class="fa-solid fa-minus"></i></a></td>
+                <td><a href="{% url 'cart:delete_all' del_id=cartitem.id%}"><i class="fa-solid fa-trash"></i></a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <table class="table text-center">
+            <thead>
+            <th>Checkout</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>   Please review your  cart item before proceeding with the request</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'cart:add_req' u_slug=user.id %}" class="btn btn-primary">request</a>
+    </div>
+
+</div>
+{% endif %}
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <ul  class="mab text-center">{{ message }}</ul>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% endblock %}
